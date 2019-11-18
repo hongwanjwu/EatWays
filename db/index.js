@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {
+mongoose.connect('mongodb://localhost/mvp', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
@@ -23,7 +23,8 @@ const placeSchema = mongoose.Schema({
 
 const restaurantSchema = mongoose.Schema({
   name: String,
-  address: String
+  address: String,
+  rating: Number
 });
 
 const userSchema = mongoose.Schema({
@@ -48,11 +49,29 @@ const addPlace = (req, res, address) => {
   const user = req.query.user;
   const place = {name, address};
 
-  User.findOneAndUpdate(
-    {user},
-    {$push: {places: place}},
-    {upsert: true}
-  ).then(() => res.sendStatus(200));
+  User.findOneAndUpdate({user}, {$push: {places: place}}, {upsert: true})
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
 };
 
-module.exports = {getUserInfo, addPlace};
+const addRestaurant = (req, res, address, rating) => {
+  const name = req.query.restaurant;
+  const user = req.query.user;
+  const restaurant = {name, address, rating};
+
+  User.findOneAndUpdate(
+    {user},
+    {$push: {restaurants: restaurant}},
+    {upsert: true}
+  )
+    .then(() => res.sendStatus(200))
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
+};
+
+module.exports = {getUserInfo, addPlace, addRestaurant};
