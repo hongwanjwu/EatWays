@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://192.168.131.4:3000';
+const baseURL = 'http://10.3.34.80:3000';
 
 const request = {
   getUserInfo: (user, cb) => {

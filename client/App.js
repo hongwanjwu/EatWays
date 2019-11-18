@@ -82,7 +82,16 @@ export default class App extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#FFF6E6',
+          fontFamily: 'Menlo',
+          color: 'blue'
+        }}
+      >
         {this.state.loggedIn ? (
           this.state.displayPlaces ? (
             <PlaceList
