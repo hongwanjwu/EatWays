@@ -9,6 +9,7 @@ const Nav = props => (
       title="Restaurants"
       onPress={() => props.handlePages('displayRestaurants')}
     />
+    <Button title="Log Out" onPress={() => props.handlePages('logOut')} />
   </View>
 );
 

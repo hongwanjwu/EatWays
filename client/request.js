@@ -39,6 +39,16 @@ const request = {
       .catch(err => {
         console.log(err);
       });
+  },
+  getNearby: (user, address, cb) => {
+    axios
+      .get(`${baseURL}/nearby`, {params: {user, address}})
+      .then(res => {
+        cb(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 };
 

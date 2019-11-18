@@ -11,8 +11,14 @@ const PlaceList = props => (
     />
     <Button title="Add" onPress={() => props.handleSubmit('addPlace')} />
     {props.places.map(place => (
-      <Place place={place} key={place._id} />
+      <Place
+        place={place}
+        user={props.user}
+        key={place._id}
+        handleDisplayNearby={props.handleDisplayNearby}
+      />
     ))}
+    <Button title="back" onPress={() => props.handlePages('nav')} />
   </View>
 );
 

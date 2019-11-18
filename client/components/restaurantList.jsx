@@ -13,6 +13,7 @@ const RestaurantList = props => (
     {props.restaurants.map(restaurant => (
       <Restaurant restaurant={restaurant} key={restaurant._id} />
     ))}
+    <Button title="back" onPress={() => props.handlePages('nav')} />
   </View>
 );
 

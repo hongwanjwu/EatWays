@@ -22,6 +22,7 @@ export default class App extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handlePages = this.handlePages.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDisplayNearby = this.handleDisplayNearby.bind(this);
   }
 
   handleInputChange(name, text) {
@@ -31,18 +32,23 @@ export default class App extends Component {
   handlePages(val) {
     const displayPlaces = val === 'displayPlaces';
     const displayRestaurants = val === 'displayRestaurants';
+    const displayNav = val === 'nav';
 
-    if (displayPlaces || displayRestaurants) {
+    if (displayPlaces || displayRestaurants || displayNav) {
       this.setState({displayPlaces, displayRestaurants});
+    }
+
+    if (val === 'logOut') {
+      this.setState({loggedIn: false});
     }
   }
 
   handleSubmit(val) {
-    const logIn = val === 'loggedIn';
+    const loggedIn = val === 'loggedIn';
 
-    if (logIn) {
+    if (loggedIn) {
       request.getUserInfo(this.state.user, (places, restaurants) => {
-        this.setState({[val]: true, places, restaurants});
+        this.setState({loggedIn, places, restaurants});
       });
     }
 
@@ -65,6 +71,15 @@ export default class App extends Component {
     }
   }
 
+  handleDisplayNearby(placeId) {
+    const places = [...this.state.places];
+    places.forEach((place, i) => {
+      places[i].displayNearby =
+        place._id === placeId ? !places[i].displayNearby : false;
+    });
+    this.setState({places});
+  }
+
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -72,14 +87,18 @@ export default class App extends Component {
           this.state.displayPlaces ? (
             <PlaceList
               places={this.state.places}
+              user={this.state.user}
               handleInputChange={this.handleInputChange}
               handleSubmit={this.handleSubmit}
+              handlePages={this.handlePages}
+              handleDisplayNearby={this.handleDisplayNearby}
             />
           ) : this.state.displayRestaurants ? (
             <RestaurantList
               restaurants={this.state.restaurants}
               handleInputChange={this.handleInputChange}
               handleSubmit={this.handleSubmit}
+              handlePages={this.handlePages}
             />
           ) : (
             <Nav user={this.state.user} handlePages={this.handlePages} />

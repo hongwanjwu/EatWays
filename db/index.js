@@ -18,7 +18,8 @@ db.once('open', function() {
 const placeSchema = mongoose.Schema({
   name: String,
   address: String,
-  info: String
+  info: String,
+  displayNearby: Boolean
 });
 
 const restaurantSchema = mongoose.Schema({
@@ -44,10 +45,15 @@ const getUserInfo = (req, res) => {
   });
 };
 
+const getPlaces = user => {
+  return User.find({user});
+};
+
 const addPlace = (req, res, address) => {
   const name = req.query.place;
   const user = req.query.user;
-  const place = {name, address};
+  const displayNearby = false;
+  const place = {name, address, displayNearby};
 
   User.findOneAndUpdate(
     {user},
@@ -78,4 +84,4 @@ const addRestaurant = (req, res, address, rating) => {
     });
 };
 
-module.exports = {getUserInfo, addPlace, addRestaurant};
+module.exports = {getUserInfo, getPlaces, addPlace, addRestaurant};

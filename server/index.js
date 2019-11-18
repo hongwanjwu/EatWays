@@ -1,14 +1,73 @@
 const express = require('express');
 const query = require('../db/index.js');
 const axios = require('axios');
+const bodyParser = require('body-parser');
+const Promise = require('bluebird');
 const API = require('../config.js');
 const app = express();
 
 const findPlaceURL =
   'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
 
+const distanceURL = 'https://maps.googleapis.com/maps/api/distancematrix/json';
+
+app.use(bodyParser.json());
+
 app.get('/user', (req, res) => {
   query.getUserInfo(req, res);
+});
+
+app.get('/nearby', (req, res) => {
+  const origins = req.query.address;
+  let originCity = origins.split(', ');
+  originCity = originCity[originCity.length - 3];
+  const nearby = [];
+  let nearbyRes = [];
+  const result = query
+    .getPlaces(req.query.user)
+    .lean()
+    .exec();
+  result
+    .then(data => {
+      const restaurants = data[0].restaurants;
+      restaurants.forEach(restaurant => {
+        let city = restaurant.address.split(', ');
+        city = city[city.length - 3];
+        if (city === originCity) {
+          nearby.push(restaurant);
+        }
+      });
+
+      nearbyRes = [...nearby];
+
+      return Promise.all(
+        nearby.map((restaurant, i) => {
+          return axios
+            .get(distanceURL, {
+              params: {
+                origins,
+                destinations: restaurant.address,
+                units: 'imperial',
+                key: API.map
+              }
+            })
+            .then(result => {
+              const distance = result.data.rows[0].elements[0].distance.text;
+              nearbyRes[i].distance = distance;
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        })
+      );
+    })
+    .then(() => {
+      res.send(nearbyRes);
+    })
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
 });
 
 app.post('/place', (req, res) => {
