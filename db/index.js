@@ -49,8 +49,12 @@ const addPlace = (req, res, address) => {
   const user = req.query.user;
   const place = {name, address};
 
-  User.findOneAndUpdate({user}, {$push: {places: place}}, {upsert: true})
-    .then(() => res.sendStatus(200))
+  User.findOneAndUpdate(
+    {user},
+    {$push: {places: place}},
+    {upsert: true, new: true}
+  )
+    .then(data => res.send(data))
     .catch(err => {
       console.log(err);
       res.send(err);
@@ -65,9 +69,9 @@ const addRestaurant = (req, res, address, rating) => {
   User.findOneAndUpdate(
     {user},
     {$push: {restaurants: restaurant}},
-    {upsert: true}
+    {upsert: true, new: true}
   )
-    .then(() => res.sendStatus(200))
+    .then(data => res.send(data))
     .catch(err => {
       console.log(err);
       res.send(err);

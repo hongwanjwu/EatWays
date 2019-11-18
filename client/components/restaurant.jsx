@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, Button, Text, View, TextInput } from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Button, Text, View, TextInput} from 'react-native';
 
-const Place = props => (
+const Place = ({restaurant}) => (
   <View>
-    <Text>{props.restaurant.name}</Text>
+    <Text>{restaurant.name}</Text>
+    <Text>{restaurant.rating}</Text>
   </View>
 );
 
