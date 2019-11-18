@@ -2,6 +2,16 @@ import React, {Component} from 'react';
 import {StyleSheet, Button, Text, View, TextInput} from 'react-native';
 import Place from './place.jsx';
 
+const style = StyleSheet.create({
+  button: {
+    width: 50,
+    backgroundColor: '#D98982',
+    borderRadius: 5,
+    color: 'white',
+    alignSelf: 'center'
+  }
+});
+
 const PlaceList = props => (
   <View>
     <TextInput
