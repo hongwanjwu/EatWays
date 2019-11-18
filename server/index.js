@@ -30,6 +30,10 @@ app.get('/nearby', (req, res) => {
   result
     .then(data => {
       const restaurants = data[0].restaurants;
+      if (!restaurants) {
+        return;
+      }
+
       restaurants.forEach(restaurant => {
         let city = restaurant.address.split(', ');
         city = city[city.length - 3];

@@ -88,8 +88,7 @@ export default class App extends Component {
           justifyContent: 'center',
           alignItems: 'center',
           backgroundColor: '#FFF6E6',
-          fontFamily: 'Menlo',
-          color: 'blue'
+          fontFamily: 'Menlo'
         }}
       >
         {this.state.loggedIn ? (
