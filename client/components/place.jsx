@@ -23,9 +23,7 @@ const Place = ({place, user, handleDisplayNearby, displayPlaces}) => (
     <TouchableOpacity
       style={style.item}
       onPress={() => {
-        if (displayPlaces) {
-          handleDisplayNearby(place._id, 'places');
-        }
+        handleDisplayNearby(place._id, 'places');
       }}
     >
       <Text style={style.text}>{place.name}</Text>

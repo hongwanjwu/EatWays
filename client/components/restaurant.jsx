@@ -19,28 +19,23 @@ const style = StyleSheet.create({
   }
 });
 
-const Restaurant = ({
-  restaurant,
-  handleDisplayNearby,
-  user,
-  displayRestaurants
-}) => (
-  <View style={style.container}>
-    <TouchableOpacity
-      onPress={() => {
-        if (displayRestaurants) {
+const Restaurant = ({restaurant, handleDisplayNearby, user}) => (
+  <View>
+    <View style={style.container}>
+      <TouchableOpacity
+        onPress={() => {
           handleDisplayNearby(restaurant._id, 'restaurants');
-        }
-      }}
-    >
-      <Text style={style.text}>{restaurant.name}</Text>
-      {restaurant.rating ? (
-        <Text style={style.text}>Rating: {restaurant.rating}</Text>
-      ) : null}
-      {restaurant.distance ? (
-        <Text style={style.text}>Distance: {restaurant.distance}</Text>
-      ) : null}
-    </TouchableOpacity>
+        }}
+      >
+        <Text style={style.text}>{restaurant.name}</Text>
+        {restaurant.rating ? (
+          <Text style={style.text}>Rating: {restaurant.rating}</Text>
+        ) : null}
+        {restaurant.distance ? (
+          <Text style={style.text}>Distance: {restaurant.distance}</Text>
+        ) : null}
+      </TouchableOpacity>
+    </View>
     {restaurant.displayNearby ? (
       <Nearby restaurant={restaurant} user={user} />
     ) : null}

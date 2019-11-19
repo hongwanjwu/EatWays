@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Restaurant from './restaurant.jsx';
-import Place from './place.jsx';
+import NearbyItem from './nearbyItem.jsx';
 import request from '../request.js';
 
 const style = StyleSheet.create({
@@ -53,10 +52,10 @@ const Nearby = props => {
       {list.length > 0 ? (
         props.place ? (
           list.map(restaurant => (
-            <Restaurant restaurant={restaurant} key={restaurant._id} />
+            <NearbyItem restaurant={restaurant} key={restaurant._id} />
           ))
         ) : (
-          list.map(place => <Place place={place} key={place._id} />)
+          list.map(place => <NearbyItem place={place} key={place._id} />)
         )
       ) : (
         <Text style={style.textInfo}>
