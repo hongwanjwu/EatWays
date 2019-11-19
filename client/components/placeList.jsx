@@ -8,6 +8,7 @@ const PlaceList = props => (
     <View style={style.addContainer}>
       <TextInput
         style={style.input}
+        value={props.place}
         placeholder="Add a place to your list"
         onChangeText={text => props.handleInputChange('place', text)}
       />

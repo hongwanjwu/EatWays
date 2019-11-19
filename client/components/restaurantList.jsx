@@ -8,6 +8,7 @@ const RestaurantList = props => (
     <View style={style.addContainer}>
       <TextInput
         style={style.input}
+        value={props.restaurant}
         placeholder="Add a restaurant to your list"
         onChangeText={text => props.handleInputChange('restaurant', text)}
       />

@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 const style = StyleSheet.create({
   //LogIn Page
   logInContainer: {
+    marginTop: 150,
     height: 200,
     justifyContent: 'space-around'
   },

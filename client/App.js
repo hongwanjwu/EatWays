@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import LogIn from './components/logIn.jsx';
 import Nav from './components/nav.jsx';
 import PlaceList from './components/placeList';
@@ -26,7 +26,9 @@ export default class App extends Component {
   }
 
   handleInputChange(name, text) {
-    text = text.toLowerCase();
+    if (name === 'user') {
+      text = text.toLowerCase();
+    }
     this.setState({[name]: text});
   }
 
@@ -40,20 +42,21 @@ export default class App extends Component {
     }
 
     if (val === 'logOut') {
-      this.setState({loggedIn: false});
+      const user = null;
+      this.setState({loggedIn: false, user});
     }
   }
 
   handleSubmit(val) {
     const loggedIn = val === 'loggedIn';
 
-    if (loggedIn) {
+    if (loggedIn && this.state.user) {
       request.getUserInfo(this.state.user, (places, restaurants) => {
         this.setState({loggedIn, places, restaurants});
       });
     }
 
-    if (val === 'addRestaurant') {
+    if (val === 'addRestaurant' && this.state.restaurant) {
       request.addRestaurant(
         this.state.user,
         this.state.restaurant,
@@ -64,7 +67,7 @@ export default class App extends Component {
       );
     }
 
-    if (val === 'addPlace') {
+    if (val === 'addPlace' && this.state.place) {
       request.addPlace(this.state.user, this.state.place, places => {
         const place = null;
         this.setState({place, places});
@@ -84,43 +87,48 @@ export default class App extends Component {
     return (
       <View
         style={{
-          flex: 1,
+          flexGrow: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#FFF6E6',
-          fontFamily: 'Menlo'
+          backgroundColor: '#FFF6E6'
         }}
       >
-        {this.state.loggedIn ? (
-          this.state.displayPlaces ? (
-            <PlaceList
-              places={this.state.places}
-              user={this.state.user}
-              handleInputChange={this.handleInputChange}
-              handleSubmit={this.handleSubmit}
-              handlePages={this.handlePages}
-              handleDisplayNearby={this.handleDisplayNearby}
-              displayPlaces={this.state.displayPlaces}
-            />
-          ) : this.state.displayRestaurants ? (
-            <RestaurantList
-              restaurants={this.state.restaurants}
-              user={this.state.user}
-              handleInputChange={this.handleInputChange}
-              handleSubmit={this.handleSubmit}
-              handlePages={this.handlePages}
-              handleDisplayNearby={this.handleDisplayNearby}
-              displayRestaurants={this.state.displayRestaurants}
-            />
-          ) : (
-            <Nav user={this.state.user} handlePages={this.handlePages} />
-          )
-        ) : (
-          <LogIn
-            handleInputChange={this.handleInputChange}
-            handleSubmit={this.handleSubmit}
-          />
-        )}
+        <ScrollView>
+          <View style={{marginTop: 100}}>
+            {this.state.loggedIn ? (
+              this.state.displayPlaces ? (
+                <PlaceList
+                  place={this.state.place}
+                  places={this.state.places}
+                  user={this.state.user}
+                  handleInputChange={this.handleInputChange}
+                  handleSubmit={this.handleSubmit}
+                  handlePages={this.handlePages}
+                  handleDisplayNearby={this.handleDisplayNearby}
+                  displayPlaces={this.state.displayPlaces}
+                />
+              ) : this.state.displayRestaurants ? (
+                <RestaurantList
+                  restaurant={this.state.restaurant}
+                  restaurants={this.state.restaurants}
+                  user={this.state.user}
+                  handleInputChange={this.handleInputChange}
+                  handleSubmit={this.handleSubmit}
+                  handlePages={this.handlePages}
+                  handleDisplayNearby={this.handleDisplayNearby}
+                  displayRestaurants={this.state.displayRestaurants}
+                />
+              ) : (
+                <Nav user={this.state.user} handlePages={this.handlePages} />
+              )
+            ) : (
+              <LogIn
+                handleInputChange={this.handleInputChange}
+                handleSubmit={this.handleSubmit}
+              />
+            )}
+          </View>
+        </ScrollView>
       </View>
     );
   }

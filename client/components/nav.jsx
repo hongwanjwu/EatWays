@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import style from './../style.js';
 
 const Nav = props => (
-  <View>
+  <View style={{marginTop: 150}}>
     <TouchableOpacity
       style={style.navButton}
       onPress={() => props.handlePages('displayPlaces')}
