@@ -1,42 +1,26 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, Text, View} from 'react-native';
-
-const style = StyleSheet.create({
-  button: {
-    width: 200,
-    backgroundColor: '#D98982',
-    borderRadius: 5,
-    color: 'white',
-    alignSelf: 'center',
-    margin: 20
-  },
-  text: {
-    color: 'white',
-    alignSelf: 'center',
-    fontSize: 25,
-    padding: 5
-  }
-});
+import {TouchableOpacity, Text, View} from 'react-native';
+import style from './../style.js';
 
 const Nav = props => (
   <View>
     <TouchableOpacity
-      style={style.button}
+      style={style.navButton}
       onPress={() => props.handlePages('displayPlaces')}
     >
-      <Text style={style.text}>Places</Text>
+      <Text style={style.navText}>Places</Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={style.button}
+      style={style.navButton}
       onPress={() => props.handlePages('displayRestaurants')}
     >
-      <Text style={style.text}>Restaurants</Text>
+      <Text style={style.navText}>Restaurants</Text>
     </TouchableOpacity>
     <TouchableOpacity
-      style={style.button}
+      style={style.navButton}
       onPress={() => props.handlePages('logOut')}
     >
-      <Text style={style.text}>Log Out</Text>
+      <Text style={style.navText}>Log Out</Text>
     </TouchableOpacity>
   </View>
 );

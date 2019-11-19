@@ -1,38 +1,23 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import Nearby from './nearby';
-
-const style = StyleSheet.create({
-  container: {
-    width: 200,
-    justifyContent: 'space-between',
-    alignSelf: 'center',
-    backgroundColor: '#F2A391',
-    borderRadius: 5,
-    margin: 10
-  },
-  text: {
-    color: 'white',
-    alignSelf: 'center',
-    fontSize: 15,
-    padding: 5
-  }
-});
+import style from './../style.js';
 
 const Restaurant = ({restaurant, handleDisplayNearby, user}) => (
   <View>
-    <View style={style.container}>
+    <View style={style.itemContainer}>
       <TouchableOpacity
+        style={{justifyContent: 'space-between'}}
         onPress={() => {
           handleDisplayNearby(restaurant._id, 'restaurants');
         }}
       >
-        <Text style={style.text}>{restaurant.name}</Text>
+        <Text style={style.buttonText}>{restaurant.name}</Text>
         {restaurant.rating ? (
-          <Text style={style.text}>Rating: {restaurant.rating}</Text>
+          <Text style={style.buttonText}>Rating: {restaurant.rating}</Text>
         ) : null}
         {restaurant.distance ? (
-          <Text style={style.text}>Distance: {restaurant.distance}</Text>
+          <Text style={style.buttonText}>Distance: {restaurant.distance}</Text>
         ) : null}
       </TouchableOpacity>
     </View>

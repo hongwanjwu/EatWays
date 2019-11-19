@@ -1,40 +1,7 @@
 import React from 'react';
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  View,
-  TextInput
-} from 'react-native';
+import {TouchableOpacity, Text, View, TextInput} from 'react-native';
 import Place from './place.jsx';
-
-const style = StyleSheet.create({
-  addContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  button: {
-    width: 50,
-    backgroundColor: '#D98982',
-    borderRadius: 5,
-    color: 'white',
-    alignSelf: 'center',
-    margin: 10
-  },
-  input: {
-    height: 40,
-    width: 200,
-    borderColor: '#3C4C59',
-    borderWidth: 1,
-    borderRadius: 5
-  },
-  text: {
-    color: 'white',
-    alignSelf: 'center',
-    fontSize: 15,
-    padding: 5
-  }
-});
+import style from './../style.js';
 
 const PlaceList = props => (
   <View style={{alignItems: 'center'}}>
@@ -45,10 +12,10 @@ const PlaceList = props => (
         onChangeText={text => props.handleInputChange('place', text)}
       />
       <TouchableOpacity
-        style={style.button}
+        style={style.addButton}
         onPress={() => props.handleSubmit('addPlace')}
       >
-        <Text style={style.text}>Add</Text>
+        <Text style={style.buttonText}>Add</Text>
       </TouchableOpacity>
     </View>
     {props.places.map(place => (
@@ -61,10 +28,10 @@ const PlaceList = props => (
       />
     ))}
     <TouchableOpacity
-      style={style.button}
+      style={style.addButton}
       onPress={() => props.handlePages('nav')}
     >
-      <Text style={style.text}>Back</Text>
+      <Text style={style.buttonText}>Back</Text>
     </TouchableOpacity>
   </View>
 );

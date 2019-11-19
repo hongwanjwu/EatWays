@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {View} from 'react-native';
 import LogIn from './components/logIn.jsx';
 import Nav from './components/nav.jsx';
 import PlaceList from './components/placeList';
