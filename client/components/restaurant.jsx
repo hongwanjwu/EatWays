@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import Nearby from './nearby';
 
 const style = StyleSheet.create({
   container: {
@@ -18,7 +19,12 @@ const style = StyleSheet.create({
   }
 });
 
-const Restaurant = ({restaurant, handleDisplayNearby, displayRestaurants}) => (
+const Restaurant = ({
+  restaurant,
+  handleDisplayNearby,
+  user,
+  displayRestaurants
+}) => (
   <View style={style.container}>
     <TouchableOpacity
       onPress={() => {
@@ -35,6 +41,9 @@ const Restaurant = ({restaurant, handleDisplayNearby, displayRestaurants}) => (
         <Text style={style.text}>Distance: {restaurant.distance}</Text>
       ) : null}
     </TouchableOpacity>
+    {restaurant.displayNearby ? (
+      <Nearby restaurant={restaurant} user={user} />
+    ) : null}
   </View>
 );
 

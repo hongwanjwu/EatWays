@@ -19,6 +19,7 @@ app.get('/user', (req, res) => {
 
 app.get('/nearby', (req, res) => {
   const origins = req.query.address;
+  const list = req.query.queryList;
   let originCity = origins.split(', ');
   originCity = originCity[originCity.length - 3];
   const nearby = [];
@@ -29,28 +30,28 @@ app.get('/nearby', (req, res) => {
     .exec();
   result
     .then(data => {
-      const restaurants = data[0].restaurants;
-      if (!restaurants) {
+      const resultList = data[0][list];
+      if (!resultList) {
         return;
       }
 
-      restaurants.forEach(restaurant => {
-        let city = restaurant.address.split(', ');
+      resultList.forEach(item => {
+        let city = item.address.split(', ');
         city = city[city.length - 3];
         if (city === originCity) {
-          nearby.push(restaurant);
+          nearby.push(item);
         }
       });
 
       nearbyRes = [...nearby];
 
       return Promise.all(
-        nearby.map((restaurant, i) => {
+        nearby.map((item, i) => {
           return axios
             .get(distanceURL, {
               params: {
                 origins,
-                destinations: restaurant.address,
+                destinations: item.address,
                 units: 'imperial',
                 key: API.map
               }

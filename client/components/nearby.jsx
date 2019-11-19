@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import Restaurant from './restaurant.jsx';
+import Place from './place.jsx';
 import request from '../request.js';
 
 const style = StyleSheet.create({
@@ -28,12 +29,13 @@ const loading = {
 
 const Nearby = props => {
   const [list, setList] = useState([loading]);
+  const item = props.place || props.restaurant;
 
   useEffect(() => {
     let subscribed = true;
-    const item = props.place || props.restaurant;
+    const queryList = props.place ? 'restaurants' : 'places';
     const address = item.address;
-    request.getNearby(props.user, address, nearbyList => {
+    request.getNearby(props.user, address, queryList, nearbyList => {
       if (subscribed) {
         setList(nearbyList);
       }
@@ -44,7 +46,7 @@ const Nearby = props => {
   return (
     <View style={style.container}>
       <Text style={style.text}>Address: </Text>
-      <Text style={style.textInfo}>{props.place.address}</Text>
+      <Text style={style.textInfo}>{item.address}</Text>
       <Text style={style.text}>
         Near By {props.place ? 'Restaurants' : 'Places'}:
       </Text>

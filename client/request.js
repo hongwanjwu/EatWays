@@ -40,9 +40,9 @@ const request = {
         console.log(err);
       });
   },
-  getNearby: (user, address, cb) => {
+  getNearby: (user, address, queryList, cb) => {
     axios
-      .get(`${baseURL}/nearby`, {params: {user, address}})
+      .get(`${baseURL}/nearby`, {params: {user, address, queryList}})
       .then(res => {
         cb(res.data);
       })
