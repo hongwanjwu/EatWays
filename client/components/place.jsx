@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Nearby from './nearby.jsx';
 
@@ -18,11 +18,15 @@ const style = StyleSheet.create({
   }
 });
 
-const Place = ({place, user, handleDisplayNearby}) => (
+const Place = ({place, user, handleDisplayNearby, displayPlaces}) => (
   <View style={{alignSelf: 'center'}}>
     <TouchableOpacity
       style={style.item}
-      onPress={() => handleDisplayNearby(place._id)}
+      onPress={() => {
+        if (displayPlaces) {
+          handleDisplayNearby(place._id, 'places');
+        }
+      }}
     >
       <Text style={style.text}>{place.name}</Text>
     </TouchableOpacity>

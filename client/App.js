@@ -71,13 +71,12 @@ export default class App extends Component {
     }
   }
 
-  handleDisplayNearby(placeId) {
-    const places = [...this.state.places];
-    places.forEach((place, i) => {
-      places[i].displayNearby =
-        place._id === placeId ? !places[i].displayNearby : false;
+  handleDisplayNearby(id, item) {
+    const list = [...this.state[item]];
+    list.forEach((ele, i) => {
+      list[i].displayNearby = ele._id === id ? !list[i].displayNearby : false;
     });
-    this.setState({places});
+    this.setState({[item]: list});
   }
 
   render() {
@@ -100,13 +99,17 @@ export default class App extends Component {
               handleSubmit={this.handleSubmit}
               handlePages={this.handlePages}
               handleDisplayNearby={this.handleDisplayNearby}
+              displayPlaces={this.state.displayPlaces}
             />
           ) : this.state.displayRestaurants ? (
             <RestaurantList
               restaurants={this.state.restaurants}
+              user={this.state.user}
               handleInputChange={this.handleInputChange}
               handleSubmit={this.handleSubmit}
               handlePages={this.handlePages}
+              handleDisplayNearby={this.handleDisplayNearby}
+              displayRestaurants={this.state.displayRestaurants}
             />
           ) : (
             <Nav user={this.state.user} handlePages={this.handlePages} />

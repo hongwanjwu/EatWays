@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -52,7 +52,13 @@ const RestaurantList = props => (
       </TouchableOpacity>
     </View>
     {props.restaurants.map(restaurant => (
-      <Restaurant restaurant={restaurant} key={restaurant._id} />
+      <Restaurant
+        restaurant={restaurant}
+        user={props.user}
+        key={restaurant._id}
+        displayRestaurants={props.displayRestaurants}
+        handleDisplayNearby={props.handleDisplayNearby}
+      />
     ))}
     <TouchableOpacity
       style={style.button}

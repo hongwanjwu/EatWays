@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 const style = StyleSheet.create({
   container: {
@@ -18,15 +18,23 @@ const style = StyleSheet.create({
   }
 });
 
-const Restaurant = ({restaurant}) => (
+const Restaurant = ({restaurant, handleDisplayNearby, displayRestaurants}) => (
   <View style={style.container}>
-    <Text style={style.text}>{restaurant.name}</Text>
-    {restaurant.rating ? (
-      <Text style={style.text}>Rating: {restaurant.rating}</Text>
-    ) : null}
-    {restaurant.distance ? (
-      <Text style={style.text}>Distance: {restaurant.distance}</Text>
-    ) : null}
+    <TouchableOpacity
+      onPress={() => {
+        if (displayRestaurants) {
+          handleDisplayNearby(restaurant._id, 'restaurants');
+        }
+      }}
+    >
+      <Text style={style.text}>{restaurant.name}</Text>
+      {restaurant.rating ? (
+        <Text style={style.text}>Rating: {restaurant.rating}</Text>
+      ) : null}
+      {restaurant.distance ? (
+        <Text style={style.text}>Distance: {restaurant.distance}</Text>
+      ) : null}
+    </TouchableOpacity>
   </View>
 );
 

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -56,6 +56,7 @@ const PlaceList = props => (
         place={place}
         user={props.user}
         key={place._id}
+        displayPlaces={props.displayPlaces}
         handleDisplayNearby={props.handleDisplayNearby}
       />
     ))}

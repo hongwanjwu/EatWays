@@ -25,7 +25,8 @@ const placeSchema = mongoose.Schema({
 const restaurantSchema = mongoose.Schema({
   name: String,
   address: String,
-  rating: Number
+  rating: Number,
+  displayNearby: Boolean
 });
 
 const userSchema = mongoose.Schema({
@@ -35,8 +36,6 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model('User', userSchema);
-const Place = mongoose.model('Place', placeSchema);
-const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
 const getUserInfo = (req, res) => {
   const user = req.query.user;
@@ -70,7 +69,8 @@ const addPlace = (req, res, address) => {
 const addRestaurant = (req, res, address, rating) => {
   const name = req.query.restaurant;
   const user = req.query.user;
-  const restaurant = {name, address, rating};
+  const displayNearby = false;
+  const restaurant = {name, address, rating, displayNearby};
 
   User.findOneAndUpdate(
     {user},
