@@ -30,6 +30,7 @@ const request = {
         console.log(err);
       });
   },
+  removeRestaurant: (user, restaurant, cb) => {},
   addPlace: (user, place, cb) => {
     axios
       .post(`${baseURL}/place`, null, {params: {user, place}})

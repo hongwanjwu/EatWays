@@ -35,6 +35,8 @@ const userSchema = mongoose.Schema({
   restaurants: [restaurantSchema]
 });
 
+const ObjectId = mongoose.Types.ObjectId;
+
 const User = mongoose.model('User', userSchema);
 
 const getUserInfo = (req, res) => {
@@ -84,4 +86,35 @@ const addRestaurant = (req, res, address, rating) => {
     });
 };
 
-module.exports = {getUserInfo, getPlaces, addPlace, addRestaurant};
+const deleteRestaurant = (req, res) => {
+  const id = new ObjectId(req.query.restaurantId);
+  const user = req.query.user;
+
+  User.findOneAndUpdate({user}, {$pull: {restaurants: {_id: id}}}, {new: true})
+    .then(data => res.send(data))
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
+};
+
+const deletePlace = (req, res) => {
+  const id = new ObjectId(req.query.placeId);
+  const user = req.query.user;
+
+  User.findOneAndUpdate({user}, {$pull: {places: {_id: id}}}, {new: true})
+    .then(data => res.send(data))
+    .catch(err => {
+      console.log(err);
+      res.send(err);
+    });
+};
+
+module.exports = {
+  getUserInfo,
+  getPlaces,
+  addPlace,
+  addRestaurant,
+  deleteRestaurant,
+  deletePlace
+};

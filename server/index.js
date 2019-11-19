@@ -119,6 +119,13 @@ app.post('/restaurant', (req, res) => {
     });
 });
 
+app.delete('/restaurant', (req, res) => {
+  query.deleteRestaurant(req, res);
+});
+
+app.delete('/place', (req, res) => {
+  query.deletePlace(req, res);
+});
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
