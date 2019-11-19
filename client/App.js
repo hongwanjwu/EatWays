@@ -26,6 +26,7 @@ export default class App extends Component {
   }
 
   handleInputChange(name, text) {
+    text = text.toLowerCase();
     this.setState({[name]: text});
   }
 

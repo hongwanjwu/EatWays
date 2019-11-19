@@ -37,7 +37,7 @@ const style = StyleSheet.create({
 });
 
 const RestaurantList = props => (
-  <View>
+  <View style={{alignItems: 'center'}}>
     <View style={style.addContainer}>
       <TextInput
         style={style.input}
