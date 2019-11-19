@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'http://10.3.34.80:3000';
+const baseURL = 'http://192.168.131.4:3000';
 
 const request = {
   getUserInfo: (user, cb) => {
@@ -30,10 +30,29 @@ const request = {
         console.log(err);
       });
   },
-  removeRestaurant: (user, restaurant, cb) => {},
+  removeRestaurant: (user, restaurantId, cb) => {
+    axios
+      .delete(`${baseURL}/restaurant`, {params: {user, restaurantId}})
+      .then(res => {
+        cb(res.data.restaurants);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
   addPlace: (user, place, cb) => {
     axios
       .post(`${baseURL}/place`, null, {params: {user, place}})
+      .then(res => {
+        cb(res.data.places);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  removePlace: (user, placeId, cb) => {
+    axios
+      .delete(`${baseURL}/place`, {params: {user, placeId}})
       .then(res => {
         cb(res.data.places);
       })

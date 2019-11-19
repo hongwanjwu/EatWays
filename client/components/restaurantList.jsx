@@ -26,6 +26,7 @@ const RestaurantList = props => (
         key={restaurant._id}
         displayRestaurants={props.displayRestaurants}
         handleDisplayNearby={props.handleDisplayNearby}
+        handleDelete={props.handleDelete}
       />
     ))}
     <TouchableOpacity

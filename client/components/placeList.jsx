@@ -26,6 +26,7 @@ const PlaceList = props => (
         key={place._id}
         displayPlaces={props.displayPlaces}
         handleDisplayNearby={props.handleDisplayNearby}
+        handleDelete={props.handleDelete}
       />
     ))}
     <TouchableOpacity

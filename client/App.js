@@ -23,6 +23,7 @@ export default class App extends Component {
     this.handlePages = this.handlePages.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDisplayNearby = this.handleDisplayNearby.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleInputChange(name, text) {
@@ -83,6 +84,18 @@ export default class App extends Component {
     this.setState({[item]: list});
   }
 
+  handleDelete(id, list) {
+    const cb = data => {
+      this.setState({[list]: data});
+    };
+    if (list === 'restaurants') {
+      request.removeRestaurant(this.state.user, id, cb);
+    }
+    if (list === 'places') {
+      request.removePlace(this.state.user, id, cb);
+    }
+  }
+
   render() {
     return (
       <View
@@ -106,6 +119,7 @@ export default class App extends Component {
                   handlePages={this.handlePages}
                   handleDisplayNearby={this.handleDisplayNearby}
                   displayPlaces={this.state.displayPlaces}
+                  handleDelete={this.handleDelete}
                 />
               ) : this.state.displayRestaurants ? (
                 <RestaurantList
@@ -117,6 +131,7 @@ export default class App extends Component {
                   handlePages={this.handlePages}
                   handleDisplayNearby={this.handleDisplayNearby}
                   displayRestaurants={this.state.displayRestaurants}
+                  handleDelete={this.handleDelete}
                 />
               ) : (
                 <Nav user={this.state.user} handlePages={this.handlePages} />

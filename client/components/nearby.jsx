@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import NearbyItem from './nearbyItem.jsx';
 import request from '../request.js';
 import style from './../style.js';
@@ -12,10 +12,10 @@ const loading = {
 const Nearby = props => {
   const [list, setList] = useState([loading]);
   const item = props.place || props.restaurant;
+  const queryList = props.place ? 'restaurants' : 'places';
 
   useEffect(() => {
     let subscribed = true;
-    const queryList = props.place ? 'restaurants' : 'places';
     const address = item.address;
     request.getNearby(props.user, address, queryList, nearbyList => {
       if (subscribed) {

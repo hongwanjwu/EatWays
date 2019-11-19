@@ -91,7 +91,9 @@ const deleteRestaurant = (req, res) => {
   const user = req.query.user;
 
   User.findOneAndUpdate({user}, {$pull: {restaurants: {_id: id}}}, {new: true})
-    .then(data => res.send(data))
+    .then(data => {
+      res.send(data);
+    })
     .catch(err => {
       console.log(err);
       res.send(err);
@@ -103,7 +105,9 @@ const deletePlace = (req, res) => {
   const user = req.query.user;
 
   User.findOneAndUpdate({user}, {$pull: {places: {_id: id}}}, {new: true})
-    .then(data => res.send(data))
+    .then(data => {
+      res.send(data);
+    })
     .catch(err => {
       console.log(err);
       res.send(err);

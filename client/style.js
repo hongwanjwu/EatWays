@@ -79,6 +79,23 @@ const style = StyleSheet.create({
     borderRadius: 5,
     margin: 10
   },
+  rowContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  deleteButton: {
+    width: 50,
+    backgroundColor: '#D98982',
+    borderRadius: 5,
+    alignSelf: 'center'
+  },
+  deleteText: {
+    color: 'white',
+    alignSelf: 'center',
+    fontSize: 10,
+    padding: 5
+  },
   //Nearby List
   nearbyContainer: {
     borderColor: '#3C4C59',
