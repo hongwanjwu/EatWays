@@ -2,6 +2,13 @@
 
 A food and travel app in which the user could input the restaurants they want to try on their "Restaurants" list, and places they want to visit on their "Places" list. When an item is clicked, it will display its address, and nearby information according to the other items on the lists.
 
+## Demo
+Quick Demo:
+
+![alt text](https://makeagif.com/i/RMhem7 "EatWays Demo")
+
+Click [here](https://youtu.be/mF7GKYb4o3g) for the full video demo.
+
 ## Features
 ### Add Places / Restaurants
 User can enter the name of the place or restaurant they want to visit to their respective lists. 
@@ -14,9 +21,3 @@ Vice versa, when the user click on the restaurant, it will display the same info
 
 ### Remove Places / Restaurants
 User can remove items from their lists as well.
-
-## Video Demo
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=mF7GKYb4o3g
-" target="_blank"><img src="http://img.youtube.com/vi/mF7GKYb4o3g/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
