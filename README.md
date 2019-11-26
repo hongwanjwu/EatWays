@@ -5,7 +5,8 @@ A food and travel app in which the user could input the restaurants they want to
 ## Demo
 Quick Demo:
 
-![alt text](https://i.makeagif.com/media/11-26-2019/RMhem7.gif "EatWays Demo")
+<img src="https://i.makeagif.com/media/11-26-2019/RMhem7.gif" 
+alt="EatWays Demo" width="240" border="10" />
 
 Click [here](https://youtu.be/mF7GKYb4o3g) for the full video demo.
 
